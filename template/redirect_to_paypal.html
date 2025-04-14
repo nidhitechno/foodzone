@@ -1,0 +1,21 @@
+<!-- templates/redirect_to_paypal.html -->
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image" href="/static/img/favicon.png">
+    
+    <title>Redirecting to PayPal...</title>
+</head>
+<body>
+    <h3>Redirecting to PayPal for payment, please wait...</h3>
+    <body onload="document.forms['paypal_form'].submit();">
+      {{ form.render }}
+  </body>
+    <script>
+        
+        document.forms[0].submit();
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Favicon -->
+<link rel="icon" type="image" href="/static/img/favicon.png">
+
+<!-- Page Header Start -->
+<div class="page-header mb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>{% if dish_category %} {{dish_category}} {% else %}Dishes {% endif %}({{dishes|length}})</h2>
+            </div>
+            <div class="col-12">
+                <a href="/">Home</a>
+                <a href="/dishes">Dishes</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+<!-- Food Start -->
+<div class="food mt-0">
+    <div class="container">
+        <div class="row align-items-center">
+        {% for i in dishes %}
+            
+            <div class="col-md-4">
+                {% if i.is_available %}
+                <div class="food-item" style="height: 680px;">
+                {% else %}
+                <div class="food-item" style="background-color: rgb(41, 39, 39);">
+                {% endif %}
+                    <a href="/media/{{i.image}}" target="_blank"><img src="/media/{{i.image}}" style="height: 200px;width: 100%;"></a>
+                    <h2 class="my-3">{{i.name}}</h2>
+                    <p>
+                        {{i.details}}
+                    </p>
+                    <h4 class="menu-text" style="font-weight: normal;">
+                        {% if i.price != i.discount_price_display %}
+                            <strong>&dollar;{{i.discount_price_display}}</strong>
+                        <!-- {% endif %}
+                            <strong>&dollar;{{i.discounted_price}}</strong> -->
+                    </h4>
+                    <h6 class="menu-text" style="font-weight: normal;">
+                        {% if i.price != i.discount_price_display %}
+                            <strong><del>&dollar;{{i.price}}</del></strong>
+                        <!-- {% endif %}
+                            <strong>&dollar;{{i.discounted_price}}</strong> -->
+                    </h6>
+                    <p>
+                        <script>
+                            var ing = '{{i.ingredients}}'.split(',');
+                            for(ingredient in ing){
+                                document.write("<span class='btn btn-sm mr-1 mb-1 btn-outline-success'>"+ing[ingredient]+"</span>");
+                            }
+                        </script>
+                    </p>
+                    {% if i.is_available %}
+                    <a href="{% url 'dish' id=i.id %}">Order Now</a>
+                    {% else %}
+                        <p class="text-danger">Not Available for delivery!</p>
+                    {% endif %}
+                    <a href="{% url 'buy_now' i.id %}">
+                        <button class="bg-warning border-0 p-2 rounded w-100 mt-3">Buy Now</button> 
+                      </a>
+                    <img src="/static/img/payment card.png" alt="" width="250px" class="mt-3">
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Food End -->
+{% endblock %}
