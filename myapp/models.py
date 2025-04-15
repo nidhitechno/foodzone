@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 # from .models import Profile
 
 
@@ -123,4 +124,18 @@ class Order(models.Model):
     class Meta:
         verbose_name_plural = "Order Table"
 
+
+class TableBooking(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    mobile = models.CharField(max_length=15)
+    date = models.DateField()
+    time = models.TimeField()
+    guests = models.PositiveIntegerField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.date} at {self.time} for {self.guests} guests"
+    
 

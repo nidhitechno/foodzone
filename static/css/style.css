@@ -246,6 +246,7 @@ a:focus {
     text-align: right;
     overflow: hidden;
     background-image: url(/static/img/carousel-1.jpg);
+    background-size: cover;
 }
 
 .carousel .carousel-img::after {
@@ -1966,3 +1967,4 @@ a:focus {
 .footer .copyright p a:hover {
     color: #719a0a;
 }
+  

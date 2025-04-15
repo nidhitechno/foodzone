@@ -147,12 +147,22 @@ def dashboard(request):
         contact = request.POST.get('contact_number')
         add = request.POST.get('address')
        
+        # profile = request.user
+        # profile.user.first_name = name 
+        # profile.user.save()
+        # profile.contact_number = contact 
+        # profile.address = add 
+          
 
-        profile.user.first_name = name 
-        profile.user.save()
-        profile.contact_number = contact 
-        profile.address = add 
-        
+        user = request.user
+        user.first_name = name
+        user.save()
+
+        profile = user.profile
+        profile.contact_number = contact
+        profile.address = add
+        profile.save()
+  
 
         if "profile_pic" in request.FILES:
             pic = request.FILES['profile_pic']
@@ -279,5 +289,11 @@ def buy_now(request, id):
 
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'redirect_to_paypal.html', {'form': form})
+
+
+
+
+
+
 
 

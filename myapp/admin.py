@@ -1,5 +1,5 @@
 from django.contrib import admin , messages
-from myapp.models import Contact,Category, Team, Dish, Profile,Order
+from myapp.models import Contact,Category, Team, Dish, Profile,Order,TableBooking
 admin.site.site_header = "FoodZone | Admin "
 
 class ContactAdmin(admin.ModelAdmin):
@@ -22,6 +22,12 @@ class DishAdmin(admin.ModelAdmin):
     def discount_price_display(self, obj):
         return f"{obj.discount_price():.2f}"
     
+@admin.register(TableBooking)
+class TableBookingAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'mobile', 'date', 'time', 'guests', 'created_at')
+    list_filter = ('date', 'guests')
+    search_fields = ('name', 'email', 'mobile')
+    
 
 admin.site.register(Contact,ContactAdmin)
 admin.site.register(Category,CategoryAdmin)
@@ -29,3 +35,4 @@ admin.site.register(Team, TeamAdmin )
 admin.site.register(Dish, DishAdmin )
 admin.site.register(Profile )
 admin.site.register(Order)
+
