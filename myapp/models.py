@@ -4,7 +4,6 @@ from django.utils import timezone
 # from .models import Profile
 
 
-
 class Contact(models.Model):
     name = models.CharField(max_length=250)
     email = models.EmailField()
@@ -12,7 +11,7 @@ class Contact(models.Model):
     message= models.TextField()
     added_on = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(default=True)
-
+    
 
     def __str__(self):
         return self.name

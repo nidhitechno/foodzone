@@ -44,6 +44,7 @@ urlpatterns = [
     path('booking/blog/', views.booking_blog, name='booking_blog'),
     path('feature/', views.feature, name='feature'),
     path('buy-now/<int:id>/', views.buy_now, name='buy_now'),
+    path('success/', views.success_page, name='success'),
     
     
 

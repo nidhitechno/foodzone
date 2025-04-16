@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404,reverse
-from myapp.models import Contact, Team, Dish, Category,Order
+from myapp.models import Contact, Team, Dish, Category,Order ,TableBooking
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse,JsonResponse, HttpResponseRedirect,HttpResponseNotAllowed
@@ -11,6 +11,10 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 from django.template.loader import get_template
 from django.template import TemplateDoesNotExist
+from .forms import BookingForm
+from datetime import datetime
+# from django.contrib.auth.decorators import login_required
+
 
 def custom_logout_view(request):
     logout(request)
@@ -29,22 +33,6 @@ def cancel_order(request, order_id):
 def index(request):
     return render(request,'index.html')
 
-def Contact_us(request):
-    if request.method == "POST":
-        name = request.POST.get("name")
-        em = request.POST.get("email")
-        sub = request.POST.get("subject")
-        msz = request.POST.get("message", "")  # Default to an empty string if no message is provided
-
-        # Ensure that the message is not None or empty
-        if not msz:
-            return HttpResponse("Please provide a message.")
-
-        obj = Contact(name=name, email=em, subject=sub, message=msz)
-        obj.save()
-        return HttpResponse(f"Dear {name}, Thanks For Your Time!")
-    
-    return render(request, 'contact.html')
      
 def about(request):
     return render(request, 'about.html')
@@ -113,14 +101,9 @@ def register(request):
             context['status'] = "A User with this email already exists"
 
     return render(request, 'register.html', context)
-
-    
     
 def contact_view(request):
     return render(request, 'contact.html')
-
-
-
 
 
 def check_user_exists(request):
@@ -132,7 +115,7 @@ def check_user_exists(request):
         return JsonResponse({'status':1,'message':'A user with this email already exists!'})
 
 
-
+# @login_required
 def dashboard(request):
     context = {}
     login_user = get_object_or_404(User, id=request.user.id)
@@ -258,6 +241,119 @@ def booking_blog(request):
 def feature(request):
     return render(request, 'feature.html')
 
+
+
+def index(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        mobile = request.POST.get('mobile')
+        date_str = request.POST.get('date')  # e.g., '04/16/2025'
+        time_str = request.POST.get('time')  # e.g., '3:50 PM'
+        guests = request.POST.get('guests')
+
+        try:
+            # Convert to Python date object
+            date = datetime.strptime(date_str, '%m/%d/%Y').date()
+            # Convert to Python time object
+            time = datetime.strptime(time_str, '%I:%M %p').time()  # 12-hour format with AM/PM
+        except ValueError:
+            return render(request, 'index.html', {'error': 'Invalid date or time format.'})
+
+        TableBooking.objects.create(
+            name=name,
+            email=email,
+            mobile=mobile,
+            date=date,
+            time=time,
+            guests=guests
+        )
+
+        return render(request, 'index.html')
+
+    return render(request, 'index.html') # redirect to a success URL or page
+
+# def index(request):
+#     if request.method== 'POST':
+#         name = request.POST.get('name')
+#         email= request.POST.get('email')
+#         subject=request.POST.get('subject')
+#         message=request.POST.get('message')
+
+#         if not message:
+#                 return render(request, 'index.html', {'error': 'Please enter a message.'})
+
+#         Contact.objects.create(
+#                 name=name,
+#                 email=email,
+#                 subject=subject,
+#                 message=message
+#         )
+#         return render(request, 'index.html', {'success': 'Thanks for contacting us!'})
+
+#     return render(request, 'index.html')
+    
+
+
+from django.shortcuts import render
+from django.core.mail import send_mail
+from .models import Contact
+from django.conf import settings  # Needed for sending email
+from datetime import datetime
+
+def index(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        if not message:
+            return render(request, 'index.html', {'error': 'Please enter a message.'})
+
+        # Save to database
+        Contact.objects.create(
+            name=name,
+            email=email,
+            subject=subject,
+            message=message
+        )
+
+        try:
+            # Send email
+            send_mail(
+                subject,
+                f"Message from {name} ({email}):\n\n{message}",
+                settings.DEFAULT_FROM_EMAIL,  # From email (configured in settings.py)
+                ['receiver@example.com'],     # Replace with your recipient
+                fail_silently=False,
+            )
+            return render(request, 'index.html', {'success': 'Thanks for contacting us! We\'ve received your message.'})
+        except Exception as e:
+            return render(request, 'index.html', {'error': f'Sorry {name}, we couldn’t send your message. Please try again later.'})
+
+    return render(request, 'index.html')
+
+def Contact_us(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        em = request.POST.get("email")
+        sub = request.POST.get("subject")
+        msz = request.POST.get("message", "")  # Default to an empty string if no message is provided
+
+        # Ensure that the message is not None or empty
+        if not msz:
+            return HttpResponse("Please provide a message.")
+
+        obj = Contact(name=name, email=em, subject=sub, message=msz)
+        obj.save()
+        return HttpResponse(f"Dear {name}, Thanks For Your Time!")
+    
+    return render(request, 'contact.html')
+ 
+
+def success_page(request):
+    return render(request, 'success.html')
 
 
 
