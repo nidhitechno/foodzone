@@ -120,6 +120,7 @@ def dashboard(request):
     context = {}
     login_user = get_object_or_404(User, id=request.user.id)
     profile = Profile.objects.get_or_create(user=request.user)
+    profile = Profile.objects.get(user__id=request.user.id)
     context['profile'] = profile
 
 
@@ -386,8 +387,11 @@ def buy_now(request, id):
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'redirect_to_paypal.html', {'form': form})
 
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')
 
-
+def Terms_conditions(request):
+    return render(request,'Terms_conditions.html')
 
 
 

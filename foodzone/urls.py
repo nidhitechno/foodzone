@@ -45,7 +45,8 @@ urlpatterns = [
     path('feature/', views.feature, name='feature'),
     path('buy-now/<int:id>/', views.buy_now, name='buy_now'),
     path('success/', views.success_page, name='success'),
-    
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
+    path('Terms_conditions/',views.Terms_conditions,name='Terms_conditions')
     
 
 

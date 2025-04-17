@@ -553,7 +553,7 @@ a:focus {
 .food {
     position: relative;
     width: 100%;
-    padding: 90px 0 60px 0;
+    height: 500px;
     margin: 15px 0;
     background: rgba(0, 0, 0, .04);
 }
@@ -561,8 +561,9 @@ a:focus {
 .food .food-item {
     position: relative;
     width: 100%;
-    margin-bottom: 30px;
+    margin-top: 50px;
     padding: 50px 30px 30px;
+    height: 400px;
     text-align: center;
     background: #ffffff;
     border-radius: 15px;
