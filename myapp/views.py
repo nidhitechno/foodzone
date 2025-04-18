@@ -393,7 +393,8 @@ def privacy_policy(request):
 def Terms_conditions(request):
     return render(request,'Terms_conditions.html')
 
-
+def help_center(request):
+    return render(request,'help_center.html')
 
 
 

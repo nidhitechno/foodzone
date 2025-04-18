@@ -554,7 +554,6 @@ a:focus {
     position: relative;
     width: 100%;
     height: 500px;
-
     margin: 15px 0;
     background: rgba(0, 0, 0, .04);
 }
@@ -1836,7 +1835,7 @@ a:focus {
 /*******************************/
 .footer {
     position: relative;
-    margin-top: 45px;
+    margin-top: 240px;
     padding-top: 90px;
     background: rgba(0, 0, 0, .04);
 }

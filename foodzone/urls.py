@@ -46,8 +46,7 @@ urlpatterns = [
     path('buy-now/<int:id>/', views.buy_now, name='buy_now'),
     path('success/', views.success_page, name='success'),
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
-    path('Terms_conditions/',views.Terms_conditions,name='Terms_conditions')
-    
-
+    path('Terms_conditions/',views.Terms_conditions,name='Terms_conditions'),
+   path('help_center/', views.help_center, name='help_center'),
 
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

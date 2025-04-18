@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Favicon -->
+<link rel="icon" type="image" href="/static/img/favicon.png">
+
+<style>
+    .nav-link {
+        color: #666666 !important;
+    }
+
+    .mu-header, nav, header {
+        background-color: rgb(230, 224, 224) !important;
+    }
+
+    .dash-content {
+        
+        border: 1px solid rgb(211, 201, 201);
+        margin: 40px 0px;
+        padding: 40px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(200, 200, 200, 0.5);
+        border-radius: 8px;
+    }
+
+    .dash-content h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 32px;
+        color: #444;
+    }
+
+    .dash-content p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .dash-content .section-title {
+        font-weight: bold;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        font-size: 20px;
+        color: #222;
+    }
+
+    .container {
+        width: 80%;
+    }
+</style>
+
+
+<div class="container">
+    <div class="dash-content">
+        <h1>help</h1>
+
+        <p>Welcome to the FoodZone Help Center! We're here to assist you with orders, deliveries, payments, and anything else you need. </p>
+
+        <div class="section-title">1.Ordering & Delivery</div>
+        <P>
+           <b>• How do I place an order?</b>
+        <P>Just browse your favorite restaurant, add items to your cart, and click “Checkout.” Choose your address and payment method to complete the order.
+        </P>
+        <P><b>• How long will my delivery take?</b></P>
+        <P> times depend on the restaurant and your location. Estimated times are shown at checkout.</P>
+        
+        <P><b>• Can I schedule an order in advance?</b></P>
+        <P>! Select “Schedule Later” at checkout to choose a future time.</P>
+        
+        <P><b> • My food hasn’t arrived. What do I do?</b></P>
+        Go to “My Orders” and check the status. If it’s delayed, you’ll see real-time updates. If it’s very late, contact our support team.
+    </P>
+        
+
+        <div class="section-title">2.Payments & Refunds</div>
+        <P><b> • What payment methods are accepted?</b></P>
+        <P> We accept credit/debit cards, paypalapp, in selected areas.</P>
+
+            <P><b>• I was charged but didn’t get my order.</b></P>
+            <P>We’re sorry! Please contact support with your order number. We’ll investigate and refund if applicable.</P>
+
+          <P><b>• How do I apply a promo code?</b></P>
+          <P>Enter your promo code on the checkout page before confirming payment.</P>
+
+
+        <div class="section-title">3.Restaurant & Menu</div>
+        <P><b>• A restaurant is missing. How do I suggest one?</b></P>
+        <P>Tap “Suggest a Restaurant” under the Help menu or contact us directly.</P>
+        
+        <P><b>• I have a food allergy. Can I make special requests?</b></P>
+        <P>Yes, add special instructions on the item or contact the restaurant directly before ordering.</P>
+
+
+        <div class="section-title">4. Login & Register</div>
+        
+        <P><b>•Forgot your password?</b></P>
+        <P>Click on "Forgot Password?" on the login page. We'll email you a link to reset it.</P> 
+
+         <P><b>•Wrong email or password?</b></P>
+         <P>Double-check your credentials. Passwords are case-sensitive.</P> 
+
+        <P><b>•Account locked?</b></P>
+        <P>For security reasons, your account might be temporarily locked after too many failed attempts. Try again after a few minutes or reset your password.</P> 
+
+
+
+        <div class="section-title">5.Create an Account</div>
+       
+        <P><b>•New to FoodZone?</b></P>
+        <P>Click on "Register" and fill in your name, email, and password to create a new account. It only takes a minute!</P>
+        
+        <P><b>•Email already in use?</b></P>
+        <P> Try logging in or use the forgot password link if you already have an account.</P>
+        
+        <P><b> •Not receiving the confirmation email?</b></P>
+        <P> Check your spam or junk folder. Still nothing? Try resending the email from the registration page.</P>
+        
+        <div class="section-title">6.Contact Us</div>
+        If you have any questions or concerns about this help  please contact us at:
+
+        <p>
+            Food Zone
+        </p>
+        <p>
+            info@example.com
+        </p>
+        <p>
+            +012 345 67890
+        </p>
+        123 Street, New York, USA</p>
+        
+    </div>
+</div>
+{% endblock %}
