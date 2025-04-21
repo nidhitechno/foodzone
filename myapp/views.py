@@ -283,7 +283,7 @@ def index(request):
 
 
 
-def index(request):
+def sendInuery(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -390,39 +390,3 @@ def submit_newsletter(request):
             messages.success(request, "Thanks for subscribing!")
         return render(request, 'index.html')
     
-def index(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        mobile = request.POST.get('mobile')
-        date_str = request.POST.get('date')  # Format: '04/16/2025'
-        time_str = request.POST.get('time')  # Format: '3:50 PM'
-        guests = request.POST.get('guests')
-
-        # Validate all fields
-        if not all([name, email, mobile, date_str, time_str, guests]):
-            messages.error(request, 'Please fill out all fields.')
-            return render(request, 'index.html')
-
-        try:
-            # Parse date and time strings
-            date = datetime.strptime(date_str, '%m/%d/%Y').date()
-            time = datetime.strptime(time_str, '%I:%M %p').time()
-        except ValueError:
-            messages.error(request, 'Invalid date or time format.')
-            return render(request, 'index.html')
-
-        # Save booking
-        TableBooking.objects.create(
-            name=name,
-            email=email,
-            mobile=mobile,
-            date=date,
-            time=time,
-            guests=guests
-        )
-
-        messages.success(request, 'Table booked successfully!')
-        return redirect('/')  # You can redirect to a "Thank you" page too
-
-    return render(request, 'index.html')
