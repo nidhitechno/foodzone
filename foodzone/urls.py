@@ -47,6 +47,7 @@ urlpatterns = [
     path('success/', views.success_page, name='success'),
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
     path('Terms_conditions/',views.Terms_conditions,name='Terms_conditions'),
-   path('help_center/', views.help_center, name='help_center'),
-
+    path('help_center/', views.help_center, name='help_center'),  
+    path('submit-newsletter/', views.submit_newsletter, name='submit_newsletter'),
+    
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

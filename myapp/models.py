@@ -138,3 +138,9 @@ class TableBooking(models.Model):
         return f"{self.name} - {self.date} at {self.time} for {self.guests} guests"
     
 
+class Newslettersubmit(models.Model):
+    email = models.EmailField(unique=True)
+    submit_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email

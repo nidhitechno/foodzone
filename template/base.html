@@ -70,7 +70,7 @@
         {% endblock %}
         <!-- Footer Start -->
         <div class="footer">
-            <div class="container">
+            <div class="container">                       
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="row">
@@ -102,14 +102,14 @@
                     </div>
                     <div class="col-lg-5">
                         <div class="footer-newsletter">
-                            <h2>Newsletter</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet elit. Quisque eu lectus a leo dictum nec non quam. Tortor eu placerat rhoncus, lorem quam iaculis felis, sed lacus neque id eros.
-                            </p>
-                            <div class="form">
-                                <input class="form-control" placeholder="Email goes here">
-                                <button class="btn custom-btn">Submit</button>
-                            </div>
+                            <h2>Sign up to Newsletter</h2>
+                            <form method="POST" action="{% url 'submit_newsletter' %}">
+                                {% csrf_token %}
+                                <div class="form">
+                                    <input class="form-control" name="email" placeholder="Your Email Address">
+                                    <button class="btn custom-btn" type="submit">submit</button>
+                                </div>
+                           </form>
                         </div>
                     </div>
                 </div>
