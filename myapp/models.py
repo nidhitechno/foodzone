@@ -1,8 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
-# from .models import Profile
-
 
 class Contact(models.Model):
     name = models.CharField(max_length=250)
@@ -12,7 +9,6 @@ class Contact(models.Model):
     added_on = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(default=True)
     
-
     def __str__(self):
         return self.name
 
@@ -26,14 +22,11 @@ class Profile(models.Model):
     address = models.TextField()
     update_on = models.DateTimeField(auto_now=True)
 
-
     def __str__(self):
         return self.user.username
     
     class Meta:
          verbose_name_plural = 'Profile Table'
-
-
 
 class Profile(models.Model):  # ✅ Make sure this exists
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -43,11 +36,6 @@ class Profile(models.Model):  # ✅ Make sure this exists
 
     def __str__(self):
         return self.user.username
-
-    # def some_function():
-    # from .models import Profile  # ✅ Move inside function if needed
-
-
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -78,7 +66,6 @@ class Team(models.Model):
     class Meta:
         verbose_name_plural = 'Team Table'
 
-
 # models.py
 class Dish(models.Model):
     name = models.CharField(max_length=200, unique=True)
@@ -107,7 +94,6 @@ class Dish(models.Model):
     class Meta:
         verbose_name_plural = "Dish Table"
 
-
 class Order(models.Model):
     customer = models.ForeignKey(Profile, on_delete=models.CASCADE)
     item = models.ForeignKey(Dish, on_delete=models.CASCADE)
@@ -123,7 +109,6 @@ class Order(models.Model):
     class Meta:
         verbose_name_plural = "Order Table"
 
-
 class TableBooking(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -137,7 +122,6 @@ class TableBooking(models.Model):
     def __str__(self):
         return f"{self.name} - {self.date} at {self.time} for {self.guests} guests"
     
-
 class Newslettersubmit(models.Model):
     email = models.EmailField(unique=True)
     submit_at = models.DateTimeField(auto_now_add=True)

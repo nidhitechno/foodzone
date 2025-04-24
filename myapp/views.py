@@ -9,8 +9,6 @@ from .models import Profile
 from .models import Order 
 from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
-from django.template.loader import get_template
-from django.template import TemplateDoesNotExist
 from datetime import datetime
 from django.contrib import messages
 from django.shortcuts import render
@@ -34,13 +32,9 @@ def cancel_order(request, order_id):
         order.save()
     return redirect('dashboard') # Replace with your desired redirect
 
-
-
-
 def index(request):
     return render(request,'index.html')
-
-     
+    
 def about(request):
     return render(request, 'about.html')
 
@@ -78,7 +72,6 @@ def all_dishes(request):
     context['dishes'] = dishes
     return render(request,'all_dishes.html', context)
  
-
 def register(request):
     context = {}
 
@@ -112,7 +105,6 @@ def register(request):
 def contact_view(request):
     return render(request, 'contact.html')
 
-
 def check_user_exists(request):
     email = request.GET.get('usern')
     check = User.objects.filter(username=email)
@@ -130,7 +122,6 @@ def dashboard(request):
     profile = Profile.objects.get(user__id=request.user.id)
     context['profile'] = profile
 
-
     #update profile
     if "update_profile" in request.POST:
         print("file=",request.FILES)
@@ -144,7 +135,6 @@ def dashboard(request):
         # profile.contact_number = contact 
         # profile.address = add 
           
-
         user = request.user
         user.first_name = name
         user.save()
@@ -154,7 +144,6 @@ def dashboard(request):
         profile.address = add
         profile.save()
   
-
         if "profile_pic" in request.FILES:
             pic = request.FILES['profile_pic']
             profile.profile_picture = pic
@@ -249,8 +238,6 @@ def booking_blog(request):
 def feature(request):
     return render(request, 'feature.html')
 
-
-
 def index(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -263,6 +250,8 @@ def index(request):
         try:
             # Convert to Python date object
             date = datetime.strptime(date_str, '%m/%d/%Y').date()
+            
+
             # Convert to Python time object
             time = datetime.strptime(time_str, '%I:%M %p').time()  # 12-hour format with AM/PM
         except ValueError:
@@ -280,8 +269,6 @@ def index(request):
         return render(request, 'index.html')
 
     return render(request, 'index.html') # redirect to a success URL or page
-
-
 
 def sendInuery(request):
     if request.method == 'POST':
@@ -333,11 +320,8 @@ def Contact_us(request):
     print("test")
     return render(request, 'contact.html')
  
-
 def success_page(request):
     return render(request, 'success.html')
-
-
 
 def buy_now(request, id):
     dish = get_object_or_404(Dish, id=id)
