@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Contact(models.Model):
     name = models.CharField(max_length=250)
     email = models.EmailField()
@@ -15,6 +16,7 @@ class Contact(models.Model):
     class Meta:
         verbose_name_plural = 'Contact Table'
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     contact_number = models.CharField(max_length=15, null=True, blank=True)
@@ -28,7 +30,8 @@ class Profile(models.Model):
     class Meta:
          verbose_name_plural = 'Profile Table'
 
-class Profile(models.Model):  # ✅ Make sure this exists
+
+class Profile(models.Model): 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
@@ -36,6 +39,7 @@ class Profile(models.Model):  # ✅ Make sure this exists
 
     def __str__(self):
         return self.user.username
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -50,6 +54,7 @@ class Category(models.Model):
     
     class Meta:
         verbose_name_plural = 'Category Table'
+
 
 class Team(models.Model):
     name = models.CharField(max_length=100)
@@ -66,7 +71,7 @@ class Team(models.Model):
     class Meta:
         verbose_name_plural = 'Team Table'
 
-# models.py
+
 class Dish(models.Model):
     name = models.CharField(max_length=200, unique=True)
     image = models.ImageField(upload_to='dishes/%Y/%m/%d')
@@ -94,6 +99,7 @@ class Dish(models.Model):
     class Meta:
         verbose_name_plural = "Dish Table"
 
+
 class Order(models.Model):
     customer = models.ForeignKey(Profile, on_delete=models.CASCADE)
     item = models.ForeignKey(Dish, on_delete=models.CASCADE)
@@ -109,6 +115,7 @@ class Order(models.Model):
     class Meta:
         verbose_name_plural = "Order Table"
 
+
 class TableBooking(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -121,7 +128,8 @@ class TableBooking(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.date} at {self.time} for {self.guests} guests"
-    
+
+
 class Newslettersubmit(models.Model):
     email = models.EmailField(unique=True)
     submit_at = models.DateTimeField(auto_now_add=True)

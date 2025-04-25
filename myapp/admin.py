@@ -1,6 +1,6 @@
 from django.contrib import admin , messages
 from django import forms
-from myapp.models import Contact,Category, Team, Dish, Profile,Order,TableBooking,Newslettersubmit
+from myapp.models import Contact, Category, Team, Dish, Profile, Order, TableBooking, Newslettersubmit
 admin.site.site_header = "FoodZone | Admin "
 
 class ContactAdmin(admin.ModelAdmin):
@@ -11,6 +11,7 @@ class ContactAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['id','name','added_on','updated_on']
+
 
 class TeamAdmin(admin.ModelAdmin):
     list_display = ['id','name','added_on','updated_on']
@@ -29,7 +30,6 @@ class TableBookingAdmin(admin.ModelAdmin):
     list_filter = ('date', 'guests')
     search_fields = ('name', 'email', 'mobile')
 
- 
 
 class NewslettersubmitAdmin(admin.ModelAdmin):
     list_display = ('email',)

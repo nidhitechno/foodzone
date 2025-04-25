@@ -25,6 +25,7 @@ def custom_logout_view(request):
     logout(request)
     return redirect('login')  
 
+
 def cancel_order(request, order_id):
     if request.method == 'POST':
         order = get_object_or_404(Order, id=order_id)
@@ -32,11 +33,14 @@ def cancel_order(request, order_id):
         order.save()
     return redirect('dashboard') # Replace with your desired redirect
 
+
 def index(request):
     return render(request,'index.html')
+  
     
 def about(request):
     return render(request, 'about.html')
+
 
 def signin(request):
     context={}
@@ -55,11 +59,13 @@ def signin(request):
 
     return render(request,'login.html', context)
 
+
 def team_members(request):
     context={}
     members = Team.objects.all().order_by('name')
     context['team_members'] = members
     return render(request,'team.html', context)
+
 
 def all_dishes(request):
     context={}
@@ -72,8 +78,10 @@ def all_dishes(request):
     context['dishes'] = dishes
     return render(request,'all_dishes.html', context)
  
+
 def register(request):
     context = {}
+
 
     if request.method == "POST":
         # Fetch data from the HTML form
@@ -169,9 +177,11 @@ def dashboard(request):
     context['orders']=orders    
     return render(request, 'dashboard.html', context)
 
+
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('login')
+
 
 def user_logout(request):
     if request.method in ['GET', 'POST']:
@@ -179,9 +189,11 @@ def user_logout(request):
         return redirect('home')
     return HttpResponseNotAllowed(['GET', 'POST'])
 
+
 def custom_logout_view(request):
     logout(request)
     return redirect('login')  
+
 
 def single_dish(request, id):
     context={}
@@ -223,6 +235,7 @@ def payment_done(request):
 
     return render(request, 'payment_successfull.html') 
 
+
 def payment_cancel(request):
     return render(request, 'payment_faield.html') 
 
@@ -237,6 +250,7 @@ def booking_blog(request):
 
 def feature(request):
     return render(request, 'feature.html')
+
 
 def index(request):
     if request.method == 'POST':
@@ -269,6 +283,7 @@ def index(request):
         return render(request, 'index.html')
 
     return render(request, 'index.html') # redirect to a success URL or page
+
 
 def sendInuery(request):
     if request.method == 'POST':
@@ -303,6 +318,7 @@ def sendInuery(request):
 
     return render(request, 'index.html')
 
+
 def Contact_us(request):
     if request.method == "POST":
         name = request.POST.get("name")
@@ -320,8 +336,10 @@ def Contact_us(request):
     print("test")
     return render(request, 'contact.html')
  
+
 def success_page(request):
     return render(request, 'success.html')
+
 
 def buy_now(request, id):
     dish = get_object_or_404(Dish, id=id)
@@ -352,14 +370,18 @@ def buy_now(request, id):
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'redirect_to_paypal.html', {'form': form})
 
+
 def privacy_policy(request):
     return render(request, 'privacy_policy.html')
+
 
 def Terms_conditions(request):
     return render(request,'Terms_conditions.html')
 
+
 def help_center(request):
     return render(request,'help_center.html')
+  
 
 def submit_newsletter(request):
     if request.method == "POST":
@@ -373,4 +395,4 @@ def submit_newsletter(request):
             )
             messages.success(request, "Thanks for subscribing!")
         return render(request, 'index.html')
-    
+   
